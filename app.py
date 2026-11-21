@@ -76,17 +76,41 @@ except Exception as e:
     st.stop()
 
 # =====================================
-# COLUMN NAME COMPATIBILITY
+# SMART COLUMN NAME DETECTION
 # =====================================
 
-# Support the newly created CSV format too.
+import re
 
-column_mapping = {
-    "Units Sold": "Sales",
-    "Unit Price": "Price"
+def normalize_column(name):
+    return re.sub(r"[^a-z0-9]", "", str(name).lower())
+
+column_aliases = {
+    "Date": ["date", "orderdate", "salesdate", "transactiondate"],
+    "Product": ["product", "productname", "item", "itemname"],
+    "Category": ["category", "productcategory", "itemcategory"],
+    "Sales": ["sales", "unitssold", "quantity", "qty", "soldquantity"],
+    "Stock": ["stock", "availablestock", "currentstock", "inventory"],
+    "Price": ["price", "unitprice", "sellingprice", "productprice"]
 }
 
-df = df.rename(columns=column_mapping)
+normalized_columns = {
+    normalize_column(col): col
+    for col in df.columns
+}
+
+rename_mapping = {}
+
+for standard_name, aliases in column_aliases.items():
+
+    for alias in aliases:
+
+        if alias in normalized_columns:
+
+            original_name = normalized_columns[alias]
+            rename_mapping[original_name] = standard_name
+            break
+
+df = df.rename(columns=rename_mapping)
 
 required_columns = [
     "Date", "Product", "Category",
@@ -101,18 +125,16 @@ missing_columns = [
 if missing_columns:
 
     st.error(
-        "CSV is missing required columns: "
+        "Some required information is missing: "
         + ", ".join(missing_columns)
     )
 
     st.info(
-        "Required columns: Date, Product, Category, "
-        "Sales (or Units Sold), Stock, "
-        "Price (or Unit Price)"
+        "Please upload a CSV containing date, product, "
+        "category, sales quantity, stock and price information."
     )
 
     st.stop()
-
 # =====================================
 # DATA CLEANING
 # =====================================
