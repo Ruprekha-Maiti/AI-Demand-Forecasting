@@ -1,0 +1,17 @@
+Product,Category,Units Sold,Unit Price,Revenue,Stock,Date
+Laptop,Electronics,42,55000,2310000,18,2026-10-01
+Smartphone,Electronics,65,22000,1430000,25,2026-10-02
+Headphones,Accessories,88,1800,158400,40,2026-10-03
+Keyboard,Accessories,54,1200,64800,32,2026-10-04
+Monitor,Electronics,29,12500,362500,12,2026-10-05
+Printer,Office Equipment,17,8500,144500,9,2026-10-06
+USB Drive,Storage,96,650,62400,55,2026-10-07
+Webcam,Accessories,38,2400,91200,14,2026-10-08
+Tablet,Electronics,31,18000,558000,11,2026-10-09
+Router,Networking,23,3200,73600,8,2026-10-10
+External HDD,Storage,27,5200,140400,16,2026-10-11
+Mouse,Accessories,47,750,35250,60,2026-10-12
+Desk Lamp,Home Office,34,950,32300,21,2026-10-13
+Office Chair,Furniture,19,7800,148200,7,2026-10-14
+Microphone,Accessories,26,4100,106600,10,2026-10-15
+Power Bank,Electronics,58,1600,92800,28,2026-10-16
